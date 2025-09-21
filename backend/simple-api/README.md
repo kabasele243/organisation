@@ -1,5 +1,7 @@
 # Simple API - Domain Driven Design
 
+[![CI](https://github.com/username/simple-api/actions/workflows/main.yml/badge.svg)](https://github.com/username/simple-api/actions/workflows/main.yml)
+
 A RESTful API built with Express.js following Domain Driven Design (DDD) principles and TypeScript.
 
 ## Architecture
@@ -232,6 +234,38 @@ The application includes a health check endpoint at `/health` that returns:
 ```
 
 This is used by Docker for container health monitoring.
+
+## Continuous Integration
+
+This project includes automated CI with GitHub Actions:
+
+### CI Pipeline
+- **Multi-version testing** - Tests on Node.js 18.x and 20.x
+- **Code quality checks** - ESLint linting validation
+- **Code formatting** - Prettier formatting validation
+- **Test coverage** - Jest test suite with coverage reporting
+- **Triggers** - Runs on every push and pull request to `main` and `develop` branches
+
+### Local Development
+```bash
+# Run all checks locally (same as CI)
+npm run check
+
+# Individual checks
+npm run lint
+npm run format:check
+npm run test:ci
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes following the coding standards
+4. Run the test suite (`npm run check`)
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
 ## License
 
