@@ -15,7 +15,7 @@ describe('Email Value Object', () => {
         'test@',
         '@example.com',
         'test@.com',
-        ''
+        '',
       ];
 
       invalidEmails.forEach(invalidEmail => {

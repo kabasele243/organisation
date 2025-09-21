@@ -10,21 +10,16 @@ export class User {
   ) {}
 
   static create(id: string, name: string, email: string): User {
-    return new User(
-      new UserId(id),
-      name,
-      new Email(email),
-      new Date()
-    );
+    return new User(new UserId(id), name, new Email(email), new Date());
   }
 
-  static fromPersistence(id: string, name: string, email: string, createdAt: Date): User {
-    return new User(
-      new UserId(id),
-      name,
-      new Email(email),
-      createdAt
-    );
+  static fromPersistence(
+    id: string,
+    name: string,
+    email: string,
+    createdAt: Date
+  ): User {
+    return new User(new UserId(id), name, new Email(email), createdAt);
   }
 
   getId(): UserId {
@@ -55,7 +50,7 @@ export class User {
       id: this.id.getValue(),
       name: this.name,
       email: this.email.getValue(),
-      createdAt: this.createdAt
+      createdAt: this.createdAt,
     };
   }
 }

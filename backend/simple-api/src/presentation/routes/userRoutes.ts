@@ -7,7 +7,9 @@ export function createUserRoutes(userController: UserController): Router {
   router.post('/users', (req, res) => userController.createUser(req, res));
   router.get('/users/:id', (req, res) => userController.getUser(req, res));
   router.get('/users', (req, res) => userController.getAllUsers(req, res));
-  router.delete('/users/:id', (req, res) => userController.deleteUser(req, res));
+  router.delete('/users/:id', (req, res) =>
+    userController.deleteUser(req, res)
+  );
 
   return router;
 }

@@ -12,7 +12,7 @@ describe('GetAllUsersUseCase', () => {
       findById: jest.fn(),
       findByEmail: jest.fn(),
       findAll: jest.fn(),
-      delete: jest.fn()
+      delete: jest.fn(),
     };
 
     getAllUsersUseCase = new GetAllUsersUseCase(mockUserRepository);

@@ -54,6 +54,10 @@ web_modules/
 # Optional eslint cache
 .eslintcache
 
+# ESLint and Prettier cache
+.eslintcache
+.prettier-cache
+
 # Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/

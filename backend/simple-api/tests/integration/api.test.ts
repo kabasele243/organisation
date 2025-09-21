@@ -11,13 +11,11 @@ describe('API Integration Tests', () => {
 
   describe('Health Check', () => {
     it('should return 200 and health status', async () => {
-      const response = await request(app)
-        .get('/health')
-        .expect(200);
+      const response = await request(app).get('/health').expect(200);
 
       expect(response.body).toEqual({
         status: 'OK',
-        timestamp: expect.any(String)
+        timestamp: expect.any(String),
       });
     });
   });
@@ -29,7 +27,7 @@ describe('API Integration Tests', () => {
       it('should create a user successfully', async () => {
         const userData = {
           name: 'John Doe',
-          email: 'john@example.com'
+          email: 'john@example.com',
         };
 
         const response = await request(app)
@@ -41,7 +39,7 @@ describe('API Integration Tests', () => {
           id: expect.any(String),
           name: userData.name,
           email: userData.email,
-          createdAt: expect.any(String)
+          createdAt: expect.any(String),
         });
 
         createdUserId = response.body.id;
@@ -49,7 +47,7 @@ describe('API Integration Tests', () => {
 
       it('should return 400 for missing name', async () => {
         const userData = {
-          email: 'test@example.com'
+          email: 'test@example.com',
         };
 
         const response = await request(app)
@@ -58,13 +56,13 @@ describe('API Integration Tests', () => {
           .expect(400);
 
         expect(response.body).toEqual({
-          error: 'Name and email are required'
+          error: 'Name and email are required',
         });
       });
 
       it('should return 400 for missing email', async () => {
         const userData = {
-          name: 'Test User'
+          name: 'Test User',
         };
 
         const response = await request(app)
@@ -73,14 +71,14 @@ describe('API Integration Tests', () => {
           .expect(400);
 
         expect(response.body).toEqual({
-          error: 'Name and email are required'
+          error: 'Name and email are required',
         });
       });
 
       it('should return 400 for invalid email format', async () => {
         const userData = {
           name: 'Test User',
-          email: 'invalid-email'
+          email: 'invalid-email',
         };
 
         const response = await request(app)
@@ -89,14 +87,14 @@ describe('API Integration Tests', () => {
           .expect(400);
 
         expect(response.body).toEqual({
-          error: 'Invalid email format'
+          error: 'Invalid email format',
         });
       });
 
       it('should return 400 for duplicate email', async () => {
         const userData = {
           name: 'Jane Doe',
-          email: 'john@example.com' // Same email as first user
+          email: 'john@example.com', // Same email as first user
         };
 
         const response = await request(app)
@@ -105,16 +103,14 @@ describe('API Integration Tests', () => {
           .expect(400);
 
         expect(response.body).toEqual({
-          error: 'User with this email already exists'
+          error: 'User with this email already exists',
         });
       });
     });
 
     describe('GET /api/users', () => {
       it('should return all users', async () => {
-        const response = await request(app)
-          .get('/api/users')
-          .expect(200);
+        const response = await request(app).get('/api/users').expect(200);
 
         expect(Array.isArray(response.body)).toBe(true);
         expect(response.body.length).toBeGreaterThan(0);
@@ -122,7 +118,7 @@ describe('API Integration Tests', () => {
           id: expect.any(String),
           name: expect.any(String),
           email: expect.any(String),
-          createdAt: expect.any(String)
+          createdAt: expect.any(String),
         });
       });
     });
@@ -137,7 +133,7 @@ describe('API Integration Tests', () => {
           id: createdUserId,
           name: 'John Doe',
           email: 'john@example.com',
-          createdAt: expect.any(String)
+          createdAt: expect.any(String),
         });
       });
 
@@ -149,22 +145,17 @@ describe('API Integration Tests', () => {
           .expect(404);
 
         expect(response.body).toEqual({
-          error: 'User not found'
+          error: 'User not found',
         });
       });
-
     });
 
     describe('DELETE /api/users/:id', () => {
       it('should delete user successfully', async () => {
-        await request(app)
-          .delete(`/api/users/${createdUserId}`)
-          .expect(204);
+        await request(app).delete(`/api/users/${createdUserId}`).expect(204);
 
         // Verify user is deleted
-        await request(app)
-          .get(`/api/users/${createdUserId}`)
-          .expect(404);
+        await request(app).get(`/api/users/${createdUserId}`).expect(404);
       });
 
       it('should return 400 for non-existent user', async () => {
@@ -175,7 +166,7 @@ describe('API Integration Tests', () => {
           .expect(400);
 
         expect(response.body).toEqual({
-          error: 'User not found'
+          error: 'User not found',
         });
       });
     });
@@ -188,7 +179,7 @@ describe('API Integration Tests', () => {
         .expect(404);
 
       expect(response.body).toEqual({
-        error: 'Route not found'
+        error: 'Route not found',
       });
     });
   });

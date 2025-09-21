@@ -43,7 +43,9 @@ describe('InMemoryUserRepository', () => {
     });
 
     it('should return null when user not found', async () => {
-      const foundUser = await repository.findById(new UserId('non-existent-id'));
+      const foundUser = await repository.findById(
+        new UserId('non-existent-id')
+      );
 
       expect(foundUser).toBeNull();
     });
@@ -54,13 +56,17 @@ describe('InMemoryUserRepository', () => {
       const user = User.create('test-id', 'John Doe', 'john@example.com');
       await repository.save(user);
 
-      const foundUser = await repository.findByEmail(new Email('john@example.com'));
+      const foundUser = await repository.findByEmail(
+        new Email('john@example.com')
+      );
 
       expect(foundUser).toBe(user);
     });
 
     it('should return null when user not found by email', async () => {
-      const foundUser = await repository.findByEmail(new Email('nonexistent@example.com'));
+      const foundUser = await repository.findByEmail(
+        new Email('nonexistent@example.com')
+      );
 
       expect(foundUser).toBeNull();
     });
@@ -100,8 +106,9 @@ describe('InMemoryUserRepository', () => {
     });
 
     it('should not throw error when deleting non-existent user', async () => {
-      await expect(repository.delete(new UserId('non-existent-id')))
-        .resolves.not.toThrow();
+      await expect(
+        repository.delete(new UserId('non-existent-id'))
+      ).resolves.not.toThrow();
     });
   });
 });

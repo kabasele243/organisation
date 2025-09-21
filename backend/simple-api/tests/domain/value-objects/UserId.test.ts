@@ -13,7 +13,9 @@ describe('UserId Value Object', () => {
       const invalidIds = ['', '   ', null, undefined];
 
       invalidIds.forEach(invalidId => {
-        expect(() => new UserId(invalidId as any)).toThrow('UserId cannot be empty');
+        expect(() => new UserId(invalidId as any)).toThrow(
+          'UserId cannot be empty'
+        );
       });
     });
   });

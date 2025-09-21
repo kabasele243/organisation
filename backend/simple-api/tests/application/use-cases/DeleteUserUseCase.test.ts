@@ -13,7 +13,7 @@ describe('DeleteUserUseCase', () => {
       findById: jest.fn(),
       findByEmail: jest.fn(),
       findAll: jest.fn(),
-      delete: jest.fn()
+      delete: jest.fn(),
     };
 
     deleteUserUseCase = new DeleteUserUseCase(mockUserRepository);
@@ -40,8 +40,9 @@ describe('DeleteUserUseCase', () => {
     it('should throw error when user not found', async () => {
       mockUserRepository.findById.mockResolvedValue(null);
 
-      await expect(deleteUserUseCase.execute(userId))
-        .rejects.toThrow('User not found');
+      await expect(deleteUserUseCase.execute(userId)).rejects.toThrow(
+        'User not found'
+      );
 
       expect(mockUserRepository.findById).toHaveBeenCalledWith(
         expect.any(UserId)
@@ -50,8 +51,9 @@ describe('DeleteUserUseCase', () => {
     });
 
     it('should throw error for invalid user id', async () => {
-      await expect(deleteUserUseCase.execute(''))
-        .rejects.toThrow('UserId cannot be empty');
+      await expect(deleteUserUseCase.execute('')).rejects.toThrow(
+        'UserId cannot be empty'
+      );
 
       expect(mockUserRepository.findById).not.toHaveBeenCalled();
       expect(mockUserRepository.delete).not.toHaveBeenCalled();

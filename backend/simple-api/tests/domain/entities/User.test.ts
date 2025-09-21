@@ -18,20 +18,27 @@ describe('User Entity', () => {
     });
 
     it('should throw error for invalid email', () => {
-      expect(() => User.create(validId, validName, 'invalid-email'))
-        .toThrow('Invalid email format');
+      expect(() => User.create(validId, validName, 'invalid-email')).toThrow(
+        'Invalid email format'
+      );
     });
 
     it('should throw error for empty id', () => {
-      expect(() => User.create('', validName, validEmail))
-        .toThrow('UserId cannot be empty');
+      expect(() => User.create('', validName, validEmail)).toThrow(
+        'UserId cannot be empty'
+      );
     });
   });
 
   describe('fromPersistence', () => {
     it('should create user from persistence data', () => {
       const createdAt = new Date('2023-01-01');
-      const user = User.fromPersistence(validId, validName, validEmail, createdAt);
+      const user = User.fromPersistence(
+        validId,
+        validName,
+        validEmail,
+        createdAt
+      );
 
       expect(user.getId().getValue()).toBe(validId);
       expect(user.getName()).toBe(validName);
@@ -67,7 +74,7 @@ describe('User Entity', () => {
         id: validId,
         name: validName,
         email: validEmail,
-        createdAt: expect.any(Date)
+        createdAt: expect.any(Date),
       });
     });
   });

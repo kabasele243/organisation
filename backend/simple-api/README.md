@@ -170,6 +170,15 @@ simple-api/
 | `npm run dev` | Start development server with hot reload |
 | `npm run build` | Build TypeScript to JavaScript |
 | `npm start` | Start production server |
+| `npm test` | Run all tests |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run test:coverage` | Run tests with coverage report |
+| `npm run test:ci` | Run tests for CI environment |
+| `npm run lint` | Run ESLint for code quality |
+| `npm run lint:fix` | Run ESLint and auto-fix issues |
+| `npm run format` | Format code with Prettier |
+| `npm run format:check` | Check code formatting |
+| `npm run check` | Run lint + format + tests |
 | `npm run docker:build` | Build Docker image |
 | `npm run docker:run` | Run Docker container |
 | `npm run docker:compose:up` | Start with Docker Compose |

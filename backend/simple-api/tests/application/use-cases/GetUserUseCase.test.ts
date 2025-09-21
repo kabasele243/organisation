@@ -13,7 +13,7 @@ describe('GetUserUseCase', () => {
       findById: jest.fn(),
       findByEmail: jest.fn(),
       findAll: jest.fn(),
-      delete: jest.fn()
+      delete: jest.fn(),
     };
 
     getUserUseCase = new GetUserUseCase(mockUserRepository);
@@ -46,8 +46,9 @@ describe('GetUserUseCase', () => {
     });
 
     it('should throw error for invalid user id', async () => {
-      await expect(getUserUseCase.execute(''))
-        .rejects.toThrow('UserId cannot be empty');
+      await expect(getUserUseCase.execute('')).rejects.toThrow(
+        'UserId cannot be empty'
+      );
 
       expect(mockUserRepository.findById).not.toHaveBeenCalled();
     });

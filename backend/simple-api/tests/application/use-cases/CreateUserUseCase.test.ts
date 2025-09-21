@@ -13,7 +13,7 @@ describe('CreateUserUseCase', () => {
       findById: jest.fn(),
       findByEmail: jest.fn(),
       findAll: jest.fn(),
-      delete: jest.fn()
+      delete: jest.fn(),
     };
 
     createUserUseCase = new CreateUserUseCase(mockUserRepository);
@@ -22,7 +22,7 @@ describe('CreateUserUseCase', () => {
   describe('execute', () => {
     const validRequest = {
       name: 'John Doe',
-      email: 'john@example.com'
+      email: 'john@example.com',
     };
 
     it('should create user successfully', async () => {
@@ -41,11 +41,16 @@ describe('CreateUserUseCase', () => {
     });
 
     it('should throw error when email already exists', async () => {
-      const existingUser = User.create('existing-id', 'Existing User', validRequest.email);
+      const existingUser = User.create(
+        'existing-id',
+        'Existing User',
+        validRequest.email
+      );
       mockUserRepository.findByEmail.mockResolvedValue(existingUser);
 
-      await expect(createUserUseCase.execute(validRequest))
-        .rejects.toThrow('User with this email already exists');
+      await expect(createUserUseCase.execute(validRequest)).rejects.toThrow(
+        'User with this email already exists'
+      );
 
       expect(mockUserRepository.save).not.toHaveBeenCalled();
     });
@@ -53,11 +58,12 @@ describe('CreateUserUseCase', () => {
     it('should throw error for invalid email', async () => {
       const invalidRequest = {
         name: 'John Doe',
-        email: 'invalid-email'
+        email: 'invalid-email',
       };
 
-      await expect(createUserUseCase.execute(invalidRequest))
-        .rejects.toThrow('Invalid email format');
+      await expect(createUserUseCase.execute(invalidRequest)).rejects.toThrow(
+        'Invalid email format'
+      );
 
       expect(mockUserRepository.findByEmail).not.toHaveBeenCalled();
       expect(mockUserRepository.save).not.toHaveBeenCalled();
@@ -70,7 +76,7 @@ describe('CreateUserUseCase', () => {
       const user1 = await createUserUseCase.execute(validRequest);
       const user2 = await createUserUseCase.execute({
         ...validRequest,
-        email: 'different@example.com'
+        email: 'different@example.com',
       });
 
       expect(user1.getId().getValue()).not.toBe(user2.getId().getValue());
