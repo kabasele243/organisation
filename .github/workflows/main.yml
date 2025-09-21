@@ -23,15 +23,24 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: 'backend/simple-api/package-lock.json'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd backend/simple-api
+          npm ci
 
       - name: Run linting
-        run: npm run lint
+        run: |
+          cd backend/simple-api
+          npm run lint
 
       - name: Check code formatting
-        run: npm run format:check
+        run: |
+          cd backend/simple-api
+          npm run format:check
 
       - name: Run tests
-        run: npm run test:ci
+        run: |
+          cd backend/simple-api
+          npm run test:ci
