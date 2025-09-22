@@ -1,0 +1,40 @@
+name: API Main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: 'backend/simple-api/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd backend/simple-api
+          npm ci
+
+      - name: Run linting
+        run: |
+          cd backend/simple-api
+          npm run lint
+
+      - name: Check code formatting
+        run: |
+          cd backend/simple-api
+          npm run format:check
+
+      - name: Run tests
+        run: |
+          cd backend/simple-api
+          npm run test:ci
