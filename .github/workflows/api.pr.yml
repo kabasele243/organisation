@@ -1,13 +1,16 @@
-name: Main Simple API
+name: Simple API - Pull Request
+
+permissions:
+  pull-requests: write
+  contents: read
 
 on:
-  push:
-    branches: [main, develop]
   pull_request:
-    branches: [main, develop]
+    branches: 
+      - main
 
 jobs:
-  lint-and-test:
+  lint-test:
     runs-on: ubuntu-latest
 
     steps:
